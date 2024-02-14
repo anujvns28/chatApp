@@ -325,6 +325,7 @@ const Chat = ({socket }) => {
               <div className='w-[40%] min-w-[280px] h-full  px-2'>
                 <ChatInfo
                   setChatInof={setChatInof}
+                  fetchUserData={fetchUserData}
                 />
               </div>
             }

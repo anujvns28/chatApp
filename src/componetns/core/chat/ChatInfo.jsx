@@ -19,6 +19,7 @@ import ChatUserInfo from './ChatUserInfo';
 
 const ChatInfo = ({
     setChatInof,
+    fetchUserData
 }) => {
     const { user } = useSelector((state) => state.user);
     const { chat } = useSelector((state) => state.chat);
@@ -131,6 +132,7 @@ const ChatInfo = ({
         await blockContact(data,dispatch)
         setModalData(null)
         setChatInof(false)
+        fetchUserData();
     }
 
     const handleBlockModal = async () => {
@@ -154,6 +156,7 @@ const ChatInfo = ({
         await unblockContact(data,dispatch)
         setModalData(null)
         setChatInof(false)
+        fetchUserData()
     }
 
     const handleUnBlockModal = async () => {
@@ -307,7 +310,7 @@ const ChatInfo = ({
                                 {
                                     groupInfo &&
                                     groupInfo.data.members.map((member,index) => {
-                                        return <div key={index} onClick={() => setUserInof(member)}> 
+                                        return <div key={index} > 
                                             <GroupMembers
                                                 member={member}
                                                 chat={chat}
@@ -337,7 +340,7 @@ const ChatInfo = ({
                                             <div onClick={handleUnBlockModal}
                                                 className='cursor-pointer flex items-center justify-start  flex-row gap-4  bg-green-400 hover:bg-green-500 text-red-500 py-3 px-5'>
                                                 <p className='text-xl font-semibold '>{<MdBlock />}</p>
-                                                <p className='text-lg'>UnBlock {chat.name}</p>
+                                                <p className='text-lg'>Unblock {chat.name}</p>
                                             </div>
                                         }
 

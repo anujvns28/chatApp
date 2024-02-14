@@ -20,7 +20,7 @@ import { logout } from '../service/operations/auth';
 import Modal from '../componetns/common/Modal';
 import { io } from 'socket.io-client';
 
-const socket = io("https://chat-app-backend-3ooi.onrender.com");
+const socket = io("http://localhost:3000");
 
 const Home = () => {
   const { token } = useSelector((state) => state.user);

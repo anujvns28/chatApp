@@ -60,7 +60,7 @@ const GroupMembers = ({ member, groupInfo, setUserInof,fetchGroupInformation }) 
             admin &&
             <div className='flex relative flex-row items-center justify-between py-2 cursor-pointer px-2 hover:bg-slate-500'>
             <div onClick={() => handleClick(member)}
-            className='flex flex-row gap-3 items-center '>
+            className='flex flex-row gap-3 items-center  w-[80%] '>
                 <img
                     src={member.image}
                     className='w-[50px] h-[50px] rounded-full'
