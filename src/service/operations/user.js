@@ -347,7 +347,7 @@ export const deleteStatus = async (data) => {
 }
 
 
-export const passwordRestLink = async (data) => {
+export const passwordRestLink = async (data,setStape) => {
     let result
     const toastId = toast.loading("loading...")
     try {  
@@ -358,18 +358,19 @@ export const passwordRestLink = async (data) => {
             );
         console.log(" reset password Send email response", response);
         result = response
+        setStape(2)
         toast.success("Reset Email Send")
     }
     catch (error) {
         console.log(" status Deletion ERROR....", error);
-        toast.error("Try again")
+        toast.error(error.response.data.message)
     }
     toast.dismiss(toastId)
     return result
 }
 
 
-export const passwordUpdate = async (data) => {
+export const passwordUpdate = async (data,navigate) => {
     let result
     const toastId = toast.loading("loading...")
     try {  
@@ -380,11 +381,12 @@ export const passwordUpdate = async (data) => {
             );
         console.log(" reset password  response", response);
         result = response
+        navigate('/login')
         toast.success("Password Reset successfully")
     }
     catch (error) {
         console.log(" status Deletion ERROR....", error);
-        toast.error("Try again")
+        toast.error(error.response.data.message)
     }
     toast.dismiss(toastId)
     return result

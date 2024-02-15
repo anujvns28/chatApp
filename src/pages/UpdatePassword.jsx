@@ -2,15 +2,17 @@ import React, { useState } from 'react'
 import { loginUser } from '../service/operations/auth';
 import { useDispatch } from 'react-redux';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import chatImg from "../assets/chatImage.png"
 import { toast } from 'react-toastify';
+import { passwordUpdate } from '../service/operations/user';
 
 const UpdatePassword = () => {
   const [formData,setFormData] = useState();
   const dispatch = useDispatch();
   const [shoPassword,setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const params = useParams()
 
   const handleChange = (e) =>{
    setFormData((prev) => ({
@@ -19,10 +21,16 @@ const UpdatePassword = () => {
    }))
   }
 
-  const handelSubmit = (e) => {
+  const handelSubmit = async(e) => {
     e.preventDefault();
    if(formData.password !== formData.confirmPassword){
     toast.error("Password not match");
+   }else{
+    const data = {
+      ...formData,
+      token: params.token
+    }
+    await passwordUpdate(data,navigate)
    }
   }
   return (

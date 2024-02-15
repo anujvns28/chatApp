@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { Link, useNavigate } from 'react-router-dom';
 import chatImg from "../assets/chatImage.png"
+import { passwordRestLink } from '../service/operations/user';
 
 const ForgotPassword = () => {
   const [formData,setFormData] = useState();
@@ -18,9 +19,9 @@ const ForgotPassword = () => {
    }))
   }
 
-  const handelSubmit = (e) => {
+  const handelSubmit = async(e) => {
     e.preventDefault();
-     setStape(2)
+    await passwordRestLink(formData.email,setStape);
   }
   return (
     <div className='flex w-full h-screen  items-center justify-center flex-col gap-2 '>

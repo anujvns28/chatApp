@@ -225,28 +225,63 @@ const Chat = ({socket }) => {
 
               <div className='h-[88%] w-full  flex flex-col justify-between  '>
                 {/* chats */}
-                <div className='w-full  h-[87%] overflow-auto  sticky top-3'>
-                  {
-                    !chats ? <div className='flex h-full items-center justify-center font-semibold text-xl'>
-                      <p>loading...</p>
+                {
+                  chat.isGroup ?
+                    <div className='w-full  h-[87%] overflow-auto  sticky top-3'>
+                      {
+                        !chats ? <div className='flex h-full items-center justify-center font-semibold text-xl'>
+                          <p>loading...</p>
+                        </div>
+                          : <div className='flex flex-col gap-4'>
+                            {
+                              chats.map((item, index) => {
+                                return <div ref={scrollRef}
+                                  key={index}
+                                  className={`scrollbar-h-* scrollbar scrollbar-track-gray-100 text-black px-2 w-full flex ${item.senderId._id == user._id ? "justify-end" : "justify-start"}`}>
+                                  <div className='flex flex-row gap-2 max-w-[70%]'>
+                                    {item.senderId._id != user._id &&  <p><img className=' rounded-full w-[30px] h-[30px]'
+                                      src={item.senderId.image} />
+                                    </p>}
+                                 
+                                    <div className={`${item.senderId._id === user._id ? "bg-green-500 w-fit  text-black" : "bg-slate-800 w-fit "}
+                              p-2 rounded-md w-full`}>
+                                      {item.senderId._id != user._id && <p className='text-green-500 w-full'>{item.senderId.name}</p>}
+                                      <p className={`${item.senderId._id === user._id ? "bg-green-500 w-fit  text-black" : " w-fit items-center flex text-white"}
+                               rounded-md max-w-[90%] leading-tight `}>
+                                        {item.msz}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              })
+                            }
+                          </div>
+                      }
                     </div>
-                      : <div className='flex flex-col gap-4'>
-                        {
-                          chats.map((item, index) => {
-                            return <div ref={scrollRef}
-                              key={index}
-                              className={`scrollbar-h-* scrollbar  scrollbar-track-gray-100 text-black px-2 w-full flex ${item.senderId == user._id ? "justify-end" : "justify-start"}`}>
-                              <p className={`${item.senderId === user._id ? "bg-green-500 w-fit  text-black" : "bg-slate-500 w-fit items-center flex"}
-                              p-2 rounded-md max-w-[70%]`}>
-                                {item.msz}
-                              </p>
 
-                            </div>
-                          })
-                        }
-                      </div>
-                  }
-                </div>
+                    : <div className='w-full  h-[87%] overflow-auto  sticky top-3'>
+                      {
+                        !chats ? <div className='flex h-full items-center justify-center font-semibold text-xl'>
+                          <p>loading...</p>
+                        </div>
+                          : <div className='flex flex-col gap-4'>
+                            {
+                              chats.map((item, index) => {
+                                return <div ref={scrollRef}
+                                  key={index}
+                                  className={`scrollbar-h-* scrollbar  scrollbar-track-gray-100 text-black px-2 w-full flex ${item.senderId == user._id ? "justify-end" : "justify-start"}`}>
+                                  <p className={`${item.senderId === user._id ? "bg-green-500 w-fit  text-black" : "bg-slate-500 w-fit items-center flex"}
+                            p-2 rounded-md max-w-[70%]`}>
+                                    {item.msz}
+                                  </p>
+
+                                </div>
+                              })
+                            }
+                          </div>
+                      }
+                    </div>
+                }
 
                 {/* inputs */}
                 {
