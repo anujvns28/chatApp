@@ -20,7 +20,9 @@ const {
     ADD_STATUS_API,
     FETCH_STATUS_API,
     DELETE_STATUS_API,
-    REQEST_USER_DATA_API
+    REQEST_USER_DATA_API,
+    PASSWORD_RESET_LINK_API,
+    PASSWORD_RESET_LINK_SEND_API
 } = userEndPoints
 
 
@@ -339,6 +341,50 @@ export const deleteStatus = async (data) => {
     catch (error) {
         console.log(" status Deletion ERROR....", error);
         toast.error("Error occured in Deleting status")
+    }
+    toast.dismiss(toastId)
+    return result
+}
+
+
+export const passwordRestLink = async (data) => {
+    let result
+    const toastId = toast.loading("loading...")
+    try {  
+        const response = await apiConnector(
+            "POST",
+            PASSWORD_RESET_LINK_SEND_API,
+            {email:data},
+            );
+        console.log(" reset password Send email response", response);
+        result = response
+        toast.success("Reset Email Send")
+    }
+    catch (error) {
+        console.log(" status Deletion ERROR....", error);
+        toast.error("Try again")
+    }
+    toast.dismiss(toastId)
+    return result
+}
+
+
+export const passwordUpdate = async (data) => {
+    let result
+    const toastId = toast.loading("loading...")
+    try {  
+        const response = await apiConnector(
+            "POST",
+            PASSWORD_RESET_LINK_API,
+            data,
+            );
+        console.log(" reset password  response", response);
+        result = response
+        toast.success("Password Reset successfully")
+    }
+    catch (error) {
+        console.log(" status Deletion ERROR....", error);
+        toast.error("Try again")
     }
     toast.dismiss(toastId)
     return result

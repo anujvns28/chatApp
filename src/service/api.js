@@ -23,7 +23,9 @@ export const userEndPoints = {
     FETCH_USER_REQUEST_API : BASE_URL + "/user/fetchRequest",
     ADD_STATUS_API : BASE_URL + "/user/addStatus",
     FETCH_STATUS_API : BASE_URL + "/user/fetchAllStatus",
-    DELETE_STATUS_API : BASE_URL + "/user/deleteStatus"
+    DELETE_STATUS_API : BASE_URL + "/user/deleteStatus",
+    PASSWORD_RESET_LINK_SEND_API : BASE_URL + "/user/sendeResetLink",
+    PASSWORD_RESET_LINK_API : BASE_URL + "/user/updatePassword"
 }
 
 export const chatEndPoints = {

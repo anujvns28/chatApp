@@ -46,7 +46,6 @@ const SelectUser = ({setSelectUser,groupInfo,fetchGroupInformation}) => {
             setSelectUser(false)
             fetchGroupInformation()
         }
-       
       }
 
     useEffect(() => {
