@@ -14,7 +14,7 @@ import { fetchUserInformaion } from '../../service/operations/user';
 
 
 
-const Chat = ({socket }) => {
+const Chat = ({socket,setNotiLength }) => {
   const { chat } = useSelector((state) => state.chat);
   const { user } = useSelector((state) => state.user);
   const [time, setTime] = useState(true);
@@ -145,11 +145,13 @@ const Chat = ({socket }) => {
     setshoMess((prev) => !prev)
   }
 
-  if (chats) {
+  
+   if(chats){
     socket.on("msg-recive", (data) => {
       setSocketMess(data);
     })
-  }
+   }
+  
 
   const fetchMszIo = () => {
     if (socketMess) {

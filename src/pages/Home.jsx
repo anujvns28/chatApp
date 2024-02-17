@@ -20,7 +20,7 @@ import { logout } from '../service/operations/auth';
 import Modal from '../componetns/common/Modal';
 import { io } from 'socket.io-client';
 
-const socket = io("http://localhost:3000");
+const socket = io("https://chat-app-backend-3ooi.onrender.com");
 
 const Home = () => {
   const { token } = useSelector((state) => state.user);
@@ -41,6 +41,7 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const otherFetureRef = useRef();
+  const [notiLength,setNotiLength] = useState();
 
   // check user login or not
   const isUserLogin = async () => {
@@ -60,6 +61,7 @@ const Home = () => {
 
   // fatching user Data
   const fetchingUserData = async() => {
+    console.log("calling fetchingUserData kjsdlkjf")
     if(user){
       const result = await fetchUserInformaion(user._id,dispatch);
     }
@@ -87,7 +89,7 @@ const Home = () => {
     setModalData(modal);
 }
 
-console.log("heloooo")
+
 
   useEffect(() => {
     isUserLogin();
@@ -107,6 +109,8 @@ console.log("heloooo")
         return
       }
     }, [])
+
+    // console.log(notiLength,"noti length")
 
   return (
     <div className='h-full w-full overflow-y-hidden'>
@@ -191,7 +195,7 @@ console.log("heloooo")
                             {
                               user.contact.map((contact, index) => {
                                 return <div key={index} className={`flex flex-col gap-2 ${chat && contact._id == chat._id ? "bg-slate-400" : ""}`}>
-                                  <Contact userData={contact} />
+                                  <Contact userData={contact}  socket={socket}/>
                                 </div>
                               })
                             }
@@ -206,7 +210,7 @@ console.log("heloooo")
                             {
                               user.group.map((contact, index) => {
                                 return <div key={index} className={`flex flex-col gap-2 ${chat && contact._id == chat._id ? "bg-slate-400" : ""}`}>
-                                  <Contact userData={contact} />
+                                  <Contact userData={contact} socket={socket} />
                                 </div>
                               })
                             }
@@ -228,7 +232,7 @@ console.log("heloooo")
           }
 
           <div className='w-[70%] min-w-[360px]  px-2'>
-            <Chat socket={socket} />
+            <Chat socket={socket} setNotiLength={setNotiLength} />
           </div>
         </div>
       }
