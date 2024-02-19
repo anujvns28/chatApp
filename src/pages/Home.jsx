@@ -110,7 +110,7 @@ const Home = () => {
       }
     }, [])
 
-    // console.log(notiLength,"noti length")
+   console.log("rendiring again")
 
   return (
     <div className='h-full w-full overflow-y-hidden'>
@@ -195,7 +195,7 @@ const Home = () => {
                             {
                               user.contact.map((contact, index) => {
                                 return <div key={index} className={`flex flex-col gap-2 ${chat && contact._id == chat._id ? "bg-slate-400" : ""}`}>
-                                  <Contact userData={contact}  socket={socket}/>
+                                  <Contact userData={contact}  socket={socket} />
                                 </div>
                               })
                             }
